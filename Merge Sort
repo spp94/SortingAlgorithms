@@ -1,0 +1,47 @@
+import java.util.*;
+public class Merge {
+   public void sort(int[] arr){
+	   // base condition for dividing the array
+	   if(arr.length < 2){
+		   return;
+	   }
+	   // divide the array
+	   int middle = arr.length / 2;
+	   int[] left = new int[middle];
+	   for(int i = 0; i < middle; i++){
+		   left[i] = arr[i];
+	   }
+	   int[] right = new int[arr.length - middle];
+	   for(int i = middle; i < arr.length; i++){
+		   right[i-middle] = arr[i];
+	   }
+	   // sort the array
+	   sort(left);
+	   sort(right);
+	   // merge the array
+	   merge(left, right, arr);
+   }
+   public void merge(int[] left, int[] right, int[] arr){
+	   int leftIndex = 0, rightIndex = 0, mainArrayIndex = 0;
+	   while(leftIndex < left.length && rightIndex < right.length){
+		   if(left[leftIndex] < right[rightIndex]){
+			   arr[mainArrayIndex++] = left[leftIndex++];
+		   }
+		   else{
+			   arr[mainArrayIndex++] = right[rightIndex++];
+		   }
+	   }
+	   while(leftIndex < left.length){
+		   arr[mainArrayIndex++] = left[leftIndex++];
+	   }
+	   while(rightIndex < right.length){
+		   arr[mainArrayIndex++] = right[rightIndex++];
+	   }
+   }
+   public static void main(String... args){
+	   int[] numbers = {1,3,2,4,6,5,7,9,8};
+	   Merge merge = new Merge();
+	   merge.sort(numbers);
+	   System.out.println(Arrays.toString(numbers));
+   }
+}
