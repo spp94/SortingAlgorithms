@@ -1,0 +1,33 @@
+import java.util.*;
+public class Quick {
+	public void sort(int[] arr, int start, int end){
+		if(start >= end){
+			return;
+		}
+		// Partitioning
+		int boundary = partition(arr, start, end);
+		sort(arr, start, boundary-1);
+		sort(arr, boundary+1, end);
+	}
+	public int partition(int[] arr, int start, int end){
+		int boundary = start-1;
+		int pivot = arr[end];
+		for(int i = start; i <= end; i++){
+			if(arr[i] <= pivot){
+				swap(arr, ++boundary, i);
+			}
+		}
+		return boundary;
+	}
+	public void swap(int[] arr, int left, int right){
+		int temp = arr[left];
+		arr[left] = arr[right];
+		arr[right] = temp;
+	}
+	public static void main(String... args){
+		int[] numbers = {2,1,4,3,6,5,8,7};
+		Quick quick = new Quick();
+		quick.sort(numbers, 0, numbers.length-1);
+		System.out.println(Arrays.toString(numbers));
+	}
+}
