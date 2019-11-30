@@ -1,0 +1,21 @@
+import java.util.*;
+public class Counting {
+   public void sort(int[] arr, int max){
+	   int[] count = new int[max+1];
+	   for(int number : arr){
+		   count[number]++;
+	   }
+	   int k = 0;
+	   for(int i = 0; i < count.length; i++){
+		   for(int j = 1; j <= count[i]; j++){
+			   arr[k++] = i;
+		   }
+	   }
+   }
+   public static void main(String...args){
+	   int[] numbers = {2,1,4,3,6,5,8,7};
+	   Counting counting = new Counting();
+	   counting.sort(numbers, 8);
+	   System.out.println(Arrays.toString(numbers));
+   }
+}
